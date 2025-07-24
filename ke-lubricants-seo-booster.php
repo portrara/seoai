@@ -312,9 +312,20 @@ class KELubricantsSEOBooster {
         $excerpt = get_the_excerpt($post_id);
         $focus_keywords = get_option('keseo_focus_keywords', '');
         
-        // Enhanced prompt for better SEO with industry expertise
+        // Enhanced prompt with validation mechanisms
         $business_context = "lubricants, automotive oils, industrial fluids, and related automotive products";
-        $prompt = "You are a senior SEO specialist with expertise in {$business_context}. Analyze the following content and generate highly optimized SEO data:
+        $market_context = $this->get_market_context();
+        
+        $prompt = "You are a senior SEO specialist with expertise in {$business_context}. Using current market data: {$market_context}
+        
+        IMPORTANT: Base keyword selection on these priority factors:
+        1. Actual search demand (not assumptions)
+        2. Commercial intent and conversion potential  
+        3. Competition level vs. site authority
+        4. Business relevance and product alignment
+        5. Local market factors if applicable
+        
+        Analyze the following content and generate highly optimized SEO data:
 
 CONTENT ANALYSIS:
 Title: {$title}
@@ -382,6 +393,37 @@ OUTPUT FORMAT: Return ONLY valid JSON with exact keys: meta_title, meta_descript
         set_transient($cache_key, $seo_data, 24 * HOUR_IN_SECONDS);
 
         return $seo_data;
+    }
+
+    private function get_market_context() {
+        // Get current trends and market data for better keyword selection
+        $context = array();
+        
+        // Get seasonal trends
+        $month = date('n');
+        if (in_array($month, [3, 4, 5])) {
+            $context[] = "Spring maintenance season - higher demand for oil changes and fluid checks";
+        } elseif (in_array($month, [6, 7, 8])) {
+            $context[] = "Summer driving season - focus on high-temperature performance";
+        } elseif (in_array($month, [9, 10, 11])) {
+            $context[] = "Fall preparation season - winterization and maintenance focus";
+        } else {
+            $context[] = "Winter season - cold weather performance and protection emphasis";
+        }
+        
+        // Get regional considerations
+        $timezone = get_option('timezone_string');
+        if (strpos($timezone, 'America') !== false) {
+            $context[] = "North American market - emphasis on automotive and industrial applications";
+        }
+        
+        // Get business focus from settings
+        $focus_keywords = get_option('keseo_focus_keywords', '');
+        if (!empty($focus_keywords)) {
+            $context[] = "Business focus areas: " . $focus_keywords;
+        }
+        
+        return implode('. ', $context);
     }
 
     private function update_seo_meta($post_id, $seo_data) {
