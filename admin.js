@@ -49,6 +49,38 @@ jQuery(document).ready(function($) {
         });
     });
 
+    // Google API testing
+    $('#test-google-api').on('click', function() {
+        var $button = $(this);
+        var $result = $('#google-api-test-result');
+        
+        $button.prop('disabled', true).text('Testing...');
+        $result.html('<span class="testing">Testing Google API connection...</span>');
+        
+        $.ajax({
+            url: keseo_ajax.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'keseo_test_google_api',
+                nonce: keseo_ajax.nonce
+            },
+            timeout: 60000,
+            success: function(response) {
+                if (response.success) {
+                    $result.html('<span class="success">✓ ' + response.data + '</span>');
+                } else {
+                    $result.html('<span class="error">✗ ' + response.data + '</span>');
+                }
+            },
+            error: function(xhr, status, error) {
+                $result.html('<span class="error">✗ Connection failed: ' + error + '</span>');
+            },
+            complete: function() {
+                $button.prop('disabled', false).text('Test Google API Connection');
+            }
+        });
+    });
+
     // Bulk SEO generation
     $('#bulk-generate-seo').on('click', function() {
         var $button = $(this);

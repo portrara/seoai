@@ -70,6 +70,16 @@ class KELubricantsSEOBooster {
         register_setting('kelubricants_seo_group', 'keseo_focus_keywords', array(
             'default' => 'lubricants, automotive oil, engine oil, industrial lubricants'
         ));
+        
+        // Google Ads API settings
+        register_setting('kelubricants_seo_group', 'keseo_google_customer_id');
+        register_setting('kelubricants_seo_group', 'keseo_google_developer_token');
+        register_setting('kelubricants_seo_group', 'keseo_google_client_id');
+        register_setting('kelubricants_seo_group', 'keseo_google_client_secret');
+        register_setting('kelubricants_seo_group', 'keseo_google_refresh_token');
+        register_setting('kelubricants_seo_group', 'keseo_enable_google_validation', array(
+            'default' => '0'
+        ));
     }
 
     public function enqueue_admin_scripts($hook) {
@@ -99,8 +109,9 @@ class KELubricantsSEOBooster {
         <div class="wrap">
             <h1><?php _e('KE Lubricants SEO Booster Settings', 'ke-seo-booster'); ?></h1>
             
-            <div class="nav-tab-wrapper">
+                            <div class="nav-tab-wrapper">
                 <a href="#general" class="nav-tab nav-tab-active"><?php _e('General', 'ke-seo-booster'); ?></a>
+                <a href="#google-api" class="nav-tab"><?php _e('Google API', 'ke-seo-booster'); ?></a>
                 <a href="#advanced" class="nav-tab"><?php _e('Advanced', 'ke-seo-booster'); ?></a>
                 <a href="#bulk-actions" class="nav-tab"><?php _e('Bulk Actions', 'ke-seo-booster'); ?></a>
             </div>
@@ -136,6 +147,79 @@ class KELubricantsSEOBooster {
                             </td>
                         </tr>
                     </table>
+                </div>
+
+                <div id="google-api" class="tab-content" style="display:none;">
+                    <h3><?php _e('Google Keyword Planner Integration', 'ke-seo-booster'); ?></h3>
+                    <p><?php _e('Connect to Google Keyword Planner for real-time keyword data validation and enhanced search volume accuracy.', 'ke-seo-booster'); ?></p>
+                    
+                    <table class="form-table">
+                        <tr>
+                            <th scope="row"><?php _e('Enable Google Validation', 'ke-seo-booster'); ?></th>
+                            <td>
+                                <label>
+                                    <input type="checkbox" name="keseo_enable_google_validation" value="1" <?php checked(get_option('keseo_enable_google_validation'), '1'); ?> />
+                                    <?php _e('Validate AI keywords with real Google Keyword Planner data', 'ke-seo-booster'); ?>
+                                </label>
+                                <p class="description"><?php _e('This will enhance keyword selection accuracy but requires Google Ads API access.', 'ke-seo-booster'); ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php _e('Customer ID', 'ke-seo-booster'); ?></th>
+                            <td>
+                                <input type="text" name="keseo_google_customer_id" value="<?php echo esc_attr(get_option('keseo_google_customer_id')); ?>" style="width:300px;" placeholder="123-456-7890" />
+                                <p class="description"><?php _e('Your Google Ads Customer ID (found in your Google Ads account)', 'ke-seo-booster'); ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php _e('Developer Token', 'ke-seo-booster'); ?></th>
+                            <td>
+                                <input type="password" name="keseo_google_developer_token" value="<?php echo esc_attr(get_option('keseo_google_developer_token')); ?>" style="width:400px;" />
+                                <p class="description"><?php _e('Google Ads API Developer Token', 'ke-seo-booster'); ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php _e('Client ID', 'ke-seo-booster'); ?></th>
+                            <td>
+                                <input type="text" name="keseo_google_client_id" value="<?php echo esc_attr(get_option('keseo_google_client_id')); ?>" style="width:400px;" />
+                                <p class="description"><?php _e('OAuth 2.0 Client ID from Google Cloud Console', 'ke-seo-booster'); ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php _e('Client Secret', 'ke-seo-booster'); ?></th>
+                            <td>
+                                <input type="password" name="keseo_google_client_secret" value="<?php echo esc_attr(get_option('keseo_google_client_secret')); ?>" style="width:400px;" />
+                                <p class="description"><?php _e('OAuth 2.0 Client Secret from Google Cloud Console', 'ke-seo-booster'); ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php _e('Refresh Token', 'ke-seo-booster'); ?></th>
+                            <td>
+                                <input type="password" name="keseo_google_refresh_token" value="<?php echo esc_attr(get_option('keseo_google_refresh_token')); ?>" style="width:400px;" />
+                                <p class="description"><?php _e('OAuth 2.0 Refresh Token for API access', 'ke-seo-booster'); ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php _e('Test Connection', 'ke-seo-booster'); ?></th>
+                            <td>
+                                <button type="button" id="test-google-api" class="button"><?php _e('Test Google API Connection', 'ke-seo-booster'); ?></button>
+                                <span id="google-api-test-result"></span>
+                                <p class="description"><?php _e('Test your Google Ads API configuration', 'ke-seo-booster'); ?></p>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <div class="google-api-setup-guide">
+                        <h4><?php _e('Setup Instructions', 'ke-seo-booster'); ?></h4>
+                        <ol>
+                            <li><?php _e('Create a Google Cloud Project and enable the Google Ads API', 'ke-seo-booster'); ?></li>
+                            <li><?php _e('Set up OAuth 2.0 credentials in Google Cloud Console', 'ke-seo-booster'); ?></li>
+                            <li><?php _e('Apply for Google Ads API access and get your Developer Token', 'ke-seo-booster'); ?></li>
+                            <li><?php _e('Generate a refresh token using the OAuth 2.0 playground', 'ke-seo-booster'); ?></li>
+                            <li><?php _e('Enter your Google Ads Customer ID from your Google Ads account', 'ke-seo-booster'); ?></li>
+                        </ol>
+                        <p><a href="https://developers.google.com/google-ads/api/docs/first-call/overview" target="_blank"><?php _e('View detailed setup guide →', 'ke-seo-booster'); ?></a></p>
+                    </div>
                 </div>
 
                 <div id="advanced" class="tab-content" style="display:none;">
@@ -294,6 +378,11 @@ class KELubricantsSEOBooster {
         $seo_data = $this->call_openai_api($post_id, $post, $api_key);
         
         if ($seo_data) {
+            // Validate with Google Keyword Planner if enabled
+            if (get_option('keseo_enable_google_validation', '0') === '1') {
+                $seo_data = $this->validate_with_google($seo_data);
+            }
+            
             $this->update_seo_meta($post_id, $seo_data);
         }
     }
@@ -424,6 +513,93 @@ OUTPUT FORMAT: Return ONLY valid JSON with exact keys: meta_title, meta_descript
         }
         
         return implode('. ', $context);
+    }
+
+    private function validate_with_google($seo_data) {
+        global $keseo_google_ads_api;
+        
+        if (!$keseo_google_ads_api) {
+            return $seo_data; // Return original if Google API not available
+        }
+        
+        // Extract keywords for validation
+        $keywords_to_validate = array();
+        
+        if (!empty($seo_data['focus_keyword'])) {
+            $keywords_to_validate[] = $seo_data['focus_keyword'];
+        }
+        
+        if (!empty($seo_data['seo_tags'])) {
+            $tags = array_map('trim', explode(',', $seo_data['seo_tags']));
+            $keywords_to_validate = array_merge($keywords_to_validate, array_slice($tags, 0, 5));
+        }
+        
+        if (empty($keywords_to_validate)) {
+            return $seo_data;
+        }
+        
+        // Get Google validation data
+        $google_data = $keseo_google_ads_api->get_keyword_data($keywords_to_validate);
+        
+        if (!$google_data) {
+            return $seo_data; // Return original if validation fails
+        }
+        
+        // Find the best keyword based on Google data
+        $best_keyword = $this->select_best_keyword($google_data);
+        
+        if ($best_keyword) {
+            // Update focus keyword with best performing option
+            $seo_data['focus_keyword'] = $best_keyword['keyword'];
+            
+            // Add Google metrics to the response
+            $seo_data['google_validation'] = array(
+                'search_volume' => $best_keyword['search_volume'],
+                'competition' => $best_keyword['competition'],
+                'avg_cpc' => $best_keyword['avg_cpc'],
+                'opportunity_score' => $best_keyword['opportunity_score'],
+                'validation_status' => 'validated'
+            );
+            
+            // Update tags to prioritize high-opportunity keywords
+            $validated_tags = array();
+            foreach ($google_data as $keyword => $data) {
+                if ($data['opportunity_score'] > 30) {
+                    $validated_tags[] = $keyword;
+                }
+            }
+            
+            if (!empty($validated_tags)) {
+                $seo_data['seo_tags'] = implode(', ', array_slice($validated_tags, 0, 8));
+            }
+        }
+        
+        return $seo_data;
+    }
+    
+    private function select_best_keyword($google_data) {
+        if (empty($google_data)) {
+            return null;
+        }
+        
+        $best_keyword = null;
+        $best_score = 0;
+        
+        foreach ($google_data as $keyword => $data) {
+            // Calculate weighted score
+            $volume_score = min($data['search_volume'] / 100, 50); // Normalize volume
+            $opportunity_score = $data['opportunity_score'];
+            $competition_penalty = $data['competition_score'] * 0.3;
+            
+            $total_score = $volume_score + $opportunity_score - $competition_penalty;
+            
+            if ($total_score > $best_score && $data['search_volume'] >= 10) {
+                $best_score = $total_score;
+                $best_keyword = $data;
+            }
+        }
+        
+        return $best_keyword;
     }
 
     private function update_seo_meta($post_id, $seo_data) {
@@ -600,11 +776,15 @@ OUTPUT FORMAT: Return ONLY valid JSON with exact keys: meta_title, meta_descript
     }
 }
 
+// Include Google Keyword Planner integration
+require_once KESEO_PLUGIN_PATH . 'google-keyword-planner-integration.php';
+
 // Initialize the plugin
 new KELubricantsSEOBooster();
 
 // Add AJAX handler for API testing
 add_action('wp_ajax_keseo_test_api', 'keseo_test_api_key');
+add_action('wp_ajax_keseo_test_google_api', 'keseo_test_google_api');
 function keseo_test_api_key() {
     check_ajax_referer('keseo_nonce', 'nonce');
     
@@ -634,6 +814,26 @@ function keseo_test_api_key() {
         $body = json_decode(wp_remote_retrieve_body($response), true);
         $error = isset($body['error']['message']) ? $body['error']['message'] : 'Unknown error';
         wp_send_json_error($error);
+    }
+}
+
+// Test Google Ads API connection
+function keseo_test_google_api() {
+    check_ajax_referer('keseo_nonce', 'nonce');
+    
+    global $keseo_google_ads_api;
+    
+    if (!$keseo_google_ads_api) {
+        wp_send_json_error('Google API integration not initialized');
+        return;
+    }
+    
+    $test_result = $keseo_google_ads_api->test_connection();
+    
+    if ($test_result['success']) {
+        wp_send_json_success($test_result['message']);
+    } else {
+        wp_send_json_error($test_result['message']);
     }
 }
 
@@ -683,6 +883,7 @@ function keseo_activation() {
     add_option('keseo_enable_og_tags', '1');
     add_option('keseo_post_types', array('post', 'page', 'product'));
     add_option('keseo_focus_keywords', 'lubricants, automotive oil, engine oil, industrial lubricants');
+    add_option('keseo_enable_google_validation', '0');
 }
 
 // Deactivation hook
