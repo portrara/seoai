@@ -1,0 +1,36 @@
+## 📥 DOWNLOAD OPTIONS FOR USER:
+
+### METHOD 1: Right-Click Download ⭐ RECOMMENDED
+- Look for the file: "DOWNLOAD-ke-lubricants-seo-booster.php" above
+- Right-click on the filename
+- Select "Save Link As" or "Download"
+- Save to your computer
+
+### METHOD 2: Triple-Click to Select
+1. Find the code block that starts with <?php
+2. Triple-click at the beginning to select all
+3. Copy (Ctrl+C) and paste into text editor
+4. Save as: ke-lubricants-seo-booster.php
+
+### METHOD 3: Browser Download
+- The file is ready in your workspace
+- Check your downloads folder
+- Look for: DOWNLOAD-ke-lubricants-seo-booster.php
+
+### METHOD 4: Mobile/Tablet Users
+- Long press on the code block
+- Select "Select All"
+- Copy and email to yourself
+- Open on computer and save as .php file
+
+### AFTER DOWNLOAD:
+1. Rename file to: ke-lubricants-seo-booster.php
+2. Upload to: /wp-content/plugins/ke-lubricants-seo-booster/
+3. Activate plugin in WordPress admin
+4. Configure OpenAI API key
+5. Start dominating SEO! 🚀
+
+### NEED HELP?
+- The complete code is in the file above
+- Just right-click and download!
+- Or copy-paste the entire code block
