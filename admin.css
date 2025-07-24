@@ -1,0 +1,390 @@
+/* KE Lubricants SEO Booster Admin Styles */
+
+.wrap h1 {
+    color: #1e3a8a;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* Tab Navigation */
+.nav-tab-wrapper {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.nav-tab {
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    color: #555;
+    text-decoration: none;
+    padding: 8px 12px;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-tab:hover {
+    background: #e9e9e9;
+    color: #333;
+}
+
+.nav-tab-active {
+    background: #fff !important;
+    color: #000 !important;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tab Content */
+.tab-content {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+    margin-top: -1px;
+}
+
+/* Form Elements */
+.form-table th {
+    width: 200px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-table input[type="text"],
+.form-table input[type="password"],
+.form-table textarea {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-table input[type="text"]:focus,
+.form-table input[type="password"]:focus,
+.form-table textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6;
+    outline: none;
+}
+
+/* Buttons */
+.button {
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.button-primary {
+    background: #3b82f6;
+    border-color: #2563eb;
+}
+
+.button-primary:hover {
+    background: #2563eb;
+    border-color: #1d4ed8;
+}
+
+#test-api-key {
+    margin-left: 10px;
+    background: #10b981;
+    border-color: #059669;
+    color: white;
+}
+
+#test-api-key:hover {
+    background: #059669;
+    border-color: #047857;
+}
+
+/* Status Messages */
+.success {
+    color: #059669;
+    font-weight: 500;
+}
+
+.error {
+    color: #dc2626;
+    font-weight: 500;
+}
+
+.testing {
+    color: #f59e0b;
+    font-weight: 500;
+}
+
+#api-test-result {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+/* Progress Bar */
+#bulk-progress {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 20px;
+    margin-top: 20px;
+    display: none;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    width: 0%;
+    transition: width 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.success-message {
+    color: #059669;
+    font-weight: 500;
+    padding: 10px;
+    background: #d1fae5;
+    border: 1px solid #a7f3d0;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: #dc2626;
+    font-weight: 500;
+    padding: 10px;
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    border-radius: 4px;
+}
+
+/* SEO Analysis Widget */
+.seo-analysis-widget {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.seo-analysis-widget h3 {
+    margin-top: 0;
+    color: #1e3a8a;
+    border-bottom: 2px solid #3b82f6;
+    padding-bottom: 8px;
+}
+
+/* SEO Preview */
+#keseo-preview-wrap {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+}
+
+.seo-preview-container {
+    margin-top: 15px;
+}
+
+.seo-preview-container h4 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.seo-item {
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+}
+
+.seo-item strong {
+    color: #374151;
+    display: inline-block;
+    width: 120px;
+}
+
+/* Character Counter */
+.char-counter {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+/* SEO Score Widget */
+.seo-score-widget {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.seo-score-widget h4 {
+    margin: 0 0 10px 0;
+    color: #1e3a8a;
+}
+
+.seo-score-widget h5 {
+    margin: 15px 0 8px 0;
+    color: #374151;
+    font-size: 14px;
+}
+
+.seo-score-widget ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.seo-score-widget li {
+    margin-bottom: 5px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.1);
+}
+
+/* Description Text */
+.description {
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Post Type Checkboxes */
+.form-table label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: normal;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .form-table th,
+    .form-table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .form-table th {
+        padding-bottom: 5px;
+    }
+    
+    .form-table input[type="text"],
+    .form-table input[type="password"],
+    .form-table textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .nav-tab {
+        display: block;
+        margin-bottom: 5px;
+        margin-right: 0;
+    }
+}
+
+/* Loading States */
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Tooltip Styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1000;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Focus Indicators */
+.form-table input:focus,
+.form-table textarea:focus,
+.form-table select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6;
+}
+
+/* Animation for successful actions */
+@keyframes fadeInSuccess {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-message {
+    animation: fadeInSuccess 0.5s ease-out;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .tab-content {
+        background: #1f2937;
+        color: #f9fafb;
+        border-color: #374151;
+    }
+    
+    .seo-analysis-widget,
+    .seo-score-widget,
+    #keseo-preview-wrap {
+        background: #1f2937;
+        border-color: #374151;
+        color: #f9fafb;
+    }
+    
+    .seo-item {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+}
